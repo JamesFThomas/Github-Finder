@@ -1,19 +1,28 @@
-import React, { Component } from 'react'
-import UserItem from './UserItem'
+import React from 'react';
+import UserItem from './UserItem';
+import Spinner from '../layout/Spinner'
+import PropTypes from 'prop-types'
 
-class Users extends Component {
+const Users = ({users, loading}) => {
   // this function maps through the gitHub users object to display user data
-
-
-  render() {
+  if(loading){
+    return <Spinner/>
+  }
+  else{
     return (
       <div style={userStyle}>
-        {this.props.users.map( user =>(
+        {users.map( user =>(
           <UserItem key={user.id} user={user}/>
         ))}
       </div>
     )
   }
+}
+
+// sets the required data types of values passed as props to Users component
+Users.proTypes = {
+  users: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired
 }
 
 // function allows us to set style attributes for DOM display of GitHub user data

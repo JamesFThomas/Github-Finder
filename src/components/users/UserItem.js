@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
+
 // this component displays GitHub API User data
-const UserItem = ({user: {login, avatar_url, htm_url}}) =>  {
+const UserItem = ({user: {login, avatar_url, html_url}}) =>  {
 
     // User component passed in as prop titled 'user'
     // user data deconstructed from props object and displayed on DOM
@@ -20,9 +21,9 @@ const UserItem = ({user: {login, avatar_url, htm_url}}) =>  {
 
         <div>
 
-          <a href={htm_url} className='btn btn-dark btn-sm my-1'>
-            More
-          </a>
+            <a href={html_url} className='btn btn-dark btn-sm my-1'>
+              More
+            </a>
 
         </div>
 

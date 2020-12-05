@@ -1,9 +1,11 @@
 import React, {Component, Fragment} from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Alert from './components/layout/Alert'
 import Users from './components/users/Users'
 import Search from './components/users/Search'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import About from './components/Pages/About'
+
 import axios from 'axios'
 import './App.css';
 
@@ -75,6 +77,7 @@ class App extends Component {
                   />
                 </Fragment>
               )}/>
+              <Route exact path='/about' component={About}/>
             </Switch>
 
 

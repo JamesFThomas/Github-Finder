@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Navbar from './components/layout/Navbar'
+import Alert from './components/layout/Alert'
 import Users from './components/users/Users'
 import Search from './components/users/Search'
 import axios from 'axios'
@@ -9,7 +10,8 @@ import './App.css';
 class App extends Component {
   state = {
     users:[],
-    loading: false
+    loading: false,
+    alert: null
   }
 
   // lifecycle method that fetches Github user data from API, loads user data to DOM upon start of app
@@ -38,20 +40,29 @@ class App extends Component {
   //  this function will clear searched users from state object
   clearUsers = () => this.setState({users: [], loading: false})
 
+  // this function will alert users to enter text for search query
+  setAlert = (msg, type) =>{
+    this.setState({alert: { msg: msg, type: type}})
+    setTimeout(()=> this.setState({alert: null}), 5000)
+  }
+
   render() {
-    const {users, loading} = this.state;
+    // destructuring values from state
+    const {users, loading, alert} = this.state;
     return (
       <div className="App">
 
         <Navbar />
 
         <div className='container'>
+          <Alert alert={alert}/>
 
           <Search
             searchUsers={this.searchUsers}
             clearUsers={this.clearUsers}
             // this boolean value will show clear button when users array has search result
             showClear={users.length > 0 ? true : false}
+            setAlert={this.setAlert}
           />
 
           <Users

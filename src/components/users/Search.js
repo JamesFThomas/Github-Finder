@@ -11,6 +11,7 @@ export class Search extends Component {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired,
   }
 
   // this function updates the text key value of the state object
@@ -22,8 +23,13 @@ export class Search extends Component {
   // this function uses state text value for a GitHub API search, passes query string up via props
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.searchUsers(this.state.text)
-    this.setState({text:''})
+    if(this.state.text === ''){
+      this.props.setAlert('Must Enter Text In Search Field')
+    }
+    else {
+      this.props.searchUsers(this.state.text)
+      this.setState({text:''})
+    }
   }
 
   render() {

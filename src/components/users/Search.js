@@ -9,6 +9,8 @@ export class Search extends Component {
 
   static propTypes = {
     searchUsers: PropTypes.func.isRequired,
+    clearUsers: PropTypes.func.isRequired,
+    showClear: PropTypes.bool.isRequired,
   }
 
   // this function updates the text key value of the state object
@@ -25,6 +27,8 @@ export class Search extends Component {
   }
 
   render() {
+    const {clearUsers, showClear} = this. props;
+
     return (
       <div>
 
@@ -46,6 +50,16 @@ export class Search extends Component {
           />
 
         </form>
+
+          {/* This conditional with "&&' will show clear button when users rendered to page only*/}
+          {showClear && (
+            <button
+              className='btn btn-light btn-block'
+              onClick={clearUsers}
+            >
+              Clear Users
+            </button>
+          )}
 
       </div>
     )

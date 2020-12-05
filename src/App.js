@@ -6,7 +6,6 @@ import axios from 'axios'
 import './App.css';
 
 // this is the parent component of our application, all other components enter through here
-
 class App extends Component {
   state = {
     users:[],
@@ -15,36 +14,32 @@ class App extends Component {
 
   // lifecycle method that fetches Github user data from API, loads user data to DOM upon start of app
   async componentDidMount(){
-
     this.setState({loading: true});
-
     // added Github API client id && client secret to axios GET request for authentication of application
     const res = await axios.get(
       `https://api.github.com/users?client_id=${
         process.env.REACT_APP_GITHUB_CLIENT_ID
       }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-
     this.setState({users: res.data, loading: false});
   }
 
-  // this function uses the string from Search component as query string
-  // text was passed up as props from Search component as props
+  // this function uses the string from Search component, passed up as props, as query string
   searchUsers = async text => {
-
     this.setState({loading: true})
-
     //  add text from form to axios GET request to API search endpoint with text as query string
     const res = await axios.get(
        `https://api.github.com/search/users?q=${text}&client_id=${
         process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${
         process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-
     // reset state to show users returned from search
     this.setState({users: res.data.items, loading: false});
-
   }
 
+  //  this function will clear searched users from state object
+  clearUsers = () => this.setState({users: [], loading: false})
+
   render() {
+    const {users, loading} = this.state;
     return (
       <div className="App">
 
@@ -52,9 +47,17 @@ class App extends Component {
 
         <div className='container'>
 
-          <Search searchUsers={this.searchUsers}/>
+          <Search
+            searchUsers={this.searchUsers}
+            clearUsers={this.clearUsers}
+            // this boolean value will show clear button when users array has search result
+            showClear={users.length > 0 ? true : false}
+          />
 
-          <Users loading={this.state.loading} users={this.state.users}/>
+          <Users
+            loading={loading}
+            users={users}
+          />
 
         </div>
 

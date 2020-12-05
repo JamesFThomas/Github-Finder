@@ -9,6 +9,9 @@ export class Search extends Component {
 
   static propTypes = {
     searchUsers: PropTypes.func.isRequired,
+    clearUsers: PropTypes.func.isRequired,
+    showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired,
   }
 
   // this function updates the text key value of the state object
@@ -20,11 +23,18 @@ export class Search extends Component {
   // this function uses state text value for a GitHub API search, passes query string up via props
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.searchUsers(this.state.text)
-    this.setState({text:''})
+    if(this.state.text === ''){
+      this.props.setAlert('Must Enter Text In Search Field')
+    }
+    else {
+      this.props.searchUsers(this.state.text)
+      this.setState({text:''})
+    }
   }
 
   render() {
+    const {clearUsers, showClear} = this. props;
+
     return (
       <div>
 
@@ -46,6 +56,16 @@ export class Search extends Component {
           />
 
         </form>
+
+          {/* This conditional with "&&' will show clear button when users rendered to page only*/}
+          {showClear && (
+            <button
+              className='btn btn-light btn-block'
+              onClick={clearUsers}
+            >
+              Clear Users
+            </button>
+          )}
 
       </div>
     )

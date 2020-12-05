@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import Navbar from './components/layout/Navbar'
 import Alert from './components/layout/Alert'
 import Users from './components/users/Users'
 import Search from './components/users/Search'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 import './App.css';
 
@@ -50,29 +51,36 @@ class App extends Component {
     // destructuring values from state
     const {users, loading, alert} = this.state;
     return (
+      <Router>
+
       <div className="App">
 
         <Navbar />
-
         <div className='container'>
-          <Alert alert={alert}/>
 
-          <Search
-            searchUsers={this.searchUsers}
-            clearUsers={this.clearUsers}
-            // this boolean value will show clear button when users array has search result
-            showClear={users.length > 0 ? true : false}
-            setAlert={this.setAlert}
-          />
+            <Alert alert={alert}/>
+            <Switch>
+              <Route exact path='/' render={props => (
+                <Fragment>
+                  <Search
+                    searchUsers={this.searchUsers}
+                    clearUsers={this.clearUsers}
+                    // this boolean value will show clear button when users array has search result
+                    showClear={users.length > 0 ? true : false}
+                    setAlert={this.setAlert}
+                    />
+                  <Users
+                    loading={loading}
+                    users={users}
+                  />
+                </Fragment>
+              )}/>
+            </Switch>
 
-          <Users
-            loading={loading}
-            users={users}
-          />
 
-        </div>
-
+          </div>
       </div>
+    </Router>
     );
   }
 

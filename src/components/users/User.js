@@ -1,4 +1,8 @@
-import React, { Component } from 'react'
+import React, { Fragment, Component } from 'react';
+import Spinner from '../layout/Spinner';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 
 // COMPONENT will render when more button is clicked
 export class User extends Component {
@@ -7,6 +11,14 @@ export class User extends Component {
   componentDidMount(){
     this.props.getUser(this.props.match.params.login)
   }
+
+  static propTypes = {
+    loading: PropTypes.bool.isRequired,
+    user: PropTypes.object.isRequired,
+    getUser: PropTypes.func.isRequired,
+  }
+
+
   render() {
 
     const {
@@ -24,13 +36,21 @@ export class User extends Component {
       hireable
     } = this.props.user;
 
-    // const { loading } = this.props;
+    const { loading } = this.props;
 
-    return (
-      <div>
+    if(loading ){ return <Spinner/> }
+
+    else {
+
+      return <Fragment>
         {name}
-      </div>
-    )
+        <br/>
+        <Link to='/' className='btn btn-light'>
+          Back To Search
+        </Link>
+      </Fragment>
+
+    }
   }
 }
 

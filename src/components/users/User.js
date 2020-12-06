@@ -10,13 +10,16 @@ export class User extends Component {
   // FUNCTION will load a single Github users page data when component is rendered
   componentDidMount(){
     this.props.getUser(this.props.match.params.login)
+    this.props.getUserRepos(this.props.match.params.login)
   }
 
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     user: PropTypes.object.isRequired,
     getUser: PropTypes.func.isRequired,
+    getUserRepos: PropTypes.func.isRequired,
   }
+
 
 
   render() {

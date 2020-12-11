@@ -3,10 +3,8 @@ import PropTypes from 'prop-types'
 
 
 const Search = ( {searchUsers, setAlert, showClear, clearUsers} ) => {
-  
+
   const  [ text, setText] = useState('');
-
-
 
   // this function updates the text key value of the state object
   const onChange = (e) => {setText(e.target.value); }

@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Spinner from '../layout/Spinner';
 import Repos from '../repos/Repos'
 import PropTypes from 'prop-types';
@@ -6,25 +6,13 @@ import { Link } from 'react-router-dom';
 
 
 // COMPONENT will render when more button is clicked
-export class User extends Component {
+const User = ( { user, loading, getUser, getUserRepos, repos, match } ) => {
 
   // FUNCTION will load a single Github users page data when component is rendered
-  componentDidMount(){
-    this.props.getUser(this.props.match.params.login)
-    this.props.getUserRepos(this.props.match.params.login)
-  }
-
-  static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    user: PropTypes.object.isRequired,
-    repos: PropTypes.array.isRequired,
-    getUser: PropTypes.func.isRequired,
-    getUserRepos: PropTypes.func.isRequired,
-  }
-
-
-
-  render() {
+  useEffect(() =>{
+    getUser(match.params.login)
+    getUserRepos(match.params.login)
+  }, [])
 
     const {
       name,
@@ -40,15 +28,12 @@ export class User extends Component {
       public_repos,
       public_gists,
       hireable
-    } = this.props.user;
-
-    const { loading, repos } = this.props;
+    } = user;
 
     if(loading ){ return <Spinner/> }
 
-    else {
-
-      return <Fragment>
+      return (
+      <Fragment>
         <br/>
         {/* Show button to return home page */}
         <Link to='/' className='btn btn-light'>
@@ -116,8 +101,15 @@ export class User extends Component {
         <Repos repos={repos}/>
 
       </Fragment>
-    }
-  }
+    );
+}
+
+User.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
+  repos: PropTypes.array.isRequired,
+  getUser: PropTypes.func.isRequired,
+  getUserRepos: PropTypes.func.isRequired,
 }
 
 export default User

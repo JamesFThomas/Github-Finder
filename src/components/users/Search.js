@@ -1,52 +1,38 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 
-export class Search extends Component {
-  state = {
-    text: ''
-  }
+const Search = ( {searchUsers, setAlert, showClear, clearUsers} ) => {
 
-  static propTypes = {
-    searchUsers: PropTypes.func.isRequired,
-    clearUsers: PropTypes.func.isRequired,
-    showClear: PropTypes.bool.isRequired,
-    setAlert: PropTypes.func.isRequired,
-  }
+  const  [ text, setText] = useState('');
 
   // this function updates the text key value of the state object
-  onChange = (e) =>{
-    // In order to reuse onChange with multiple input fields, use name value from event object to target desired value
-    this.setState({ [e.target.name]: e.target.value});
-  }
+  const onChange = (e) => {setText(e.target.value); }
 
   // this function uses state text value for a GitHub API search, passes query string up via props
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    if(this.state.text === ''){
-      this.props.setAlert('Must Enter Text In Search Field')
+    if(text === ''){
+      setAlert('Must Enter Text In Search Field')
     }
     else {
-      this.props.searchUsers(this.state.text)
-      this.setState({text:''})
+      searchUsers(text)
+      setText('')
     }
   }
-
-  render() {
-    const {clearUsers, showClear} = this.props;
 
     return (
       <div>
 
         {/* this element will show as a form on the DOM, with text field and submit button */}
-        <form onSubmit={this.onSubmit} className='form'>
+        <form onSubmit={onSubmit} className='form'>
 
           <input
             type='text'
             name='text'
             placeholder='Search Users...'
-            value={this.state.text}
-            onChange={this.onChange}
+            value={text}
+            onChange={onChange}
           />
 
           <input
@@ -69,7 +55,13 @@ export class Search extends Component {
 
       </div>
     )
-  }
+}
+
+Search.propTypes = {
+  searchUsers: PropTypes.func.isRequired,
+  clearUsers: PropTypes.func.isRequired,
+  showClear: PropTypes.bool.isRequired,
+  setAlert: PropTypes.func.isRequired,
 }
 
 export default Search

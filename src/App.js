@@ -41,24 +41,6 @@ const App = () => {
   }, [])
 
 
-  //  FUNCTION uses the string from Search component, passed up as props, as query string
-  const searchUsers = async text => {
-
-    // set state loading key value to true to show spinner gif
-    setLoading(true)
-
-    // authenticated GET request to Github API '/search' endpoint with text from Search component
-    const res = await axios.get(
-       `https://api.github.com/search/users?q=${text}&client_id=${
-        process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${
-        process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-
-    // reset state to show users returned from search
-    setUsers(res.data.items);
-    // set loading to false
-    setLoading(false);
-  }
-
   //  FUNCTION will clear searched users from state object
   const clearUsers = () => {
     setUsers([])
@@ -123,7 +105,6 @@ const App = () => {
                   <Route exact path='/' render={props => (
                     <Fragment>
                       <Search
-                        searchUsers={searchUsers}
                         clearUsers={clearUsers}
                         // this boolean value will show clear button when users array has search result
                         showClear={users.length > 0 ? true : false}

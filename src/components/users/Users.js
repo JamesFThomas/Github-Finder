@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import UserItem from './UserItem';
-import Spinner from '../layout/Spinner'
-import PropTypes from 'prop-types'
+import Spinner from '../layout/Spinner';
+import PropTypes from 'prop-types';
+import GithubContext from '../../context/github/githubContext';
 
-const Users = ({users, loading}) => {
+const Users = () => {
+
+  // initialize the imported githubContext with hook to access state actions and attributes
+  const githubContext = useContext(GithubContext)
+
+  // deconstructed state attributes from githubContext for use in component
+  const { loading, users } = githubContext;
+
   // this function maps through the gitHub users object to display user data
   if(loading){
     return <Spinner/>

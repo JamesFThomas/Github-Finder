@@ -45,9 +45,12 @@ const GithubState = (props) => {
 
   // Get Repos
 
-  // Clear Users
+  //  FUNCTION  clearUsers() => removes searched users from state object and screen display
+  const clearUsers = () => {
+    dispatch({ type: CLEAR_USERS });
+  }
 
-  // Set Loading
+  // FUNCTION setLoading() => set state loading attribute so spinner GIF will show
   const setLoading = () =>{
     dispatch({ type: SET_LOADING });
   }
@@ -60,7 +63,8 @@ const GithubState = (props) => {
         user: state.user,
         repos: state.repos,
         loading: state.loading,
-        searchUsers
+        searchUsers,
+        clearUsers
       }}
     >
         {props.children}

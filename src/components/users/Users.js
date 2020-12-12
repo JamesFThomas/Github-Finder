@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import UserItem from './UserItem';
 import Spinner from '../layout/Spinner';
-import PropTypes from 'prop-types';
 import GithubContext from '../../context/github/githubContext';
 
 const Users = () => {
@@ -25,12 +24,6 @@ const Users = () => {
       </div>
     )
   }
-}
-
-// sets the required data types of values passed as props to Users component
-Users.proTypes = {
-  users: PropTypes.array.isRequired,
-  loading: PropTypes.bool.isRequired
 }
 
 // function allows us to set style attributes for DOM display of GitHub user data

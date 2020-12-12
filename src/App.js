@@ -13,39 +13,30 @@ import './App.css';
 
 // this is the parent component of our application, all other components enter through here
 const App = () => {
-
-  const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
   // FUNCTION that fetches Github user data from API, loads user data to DOM upon start of app
-  useEffect(async () =>{
+  // useEffect(async () =>{
 
-    // set state loading key value to true to show spinner gif
-    setLoading(true)
+  //   // set state loading key value to true to show spinner gif
+  //   setLoading(true)
 
-    // GET request to Github API for first 30 users upon initial render
-    const res = await axios.get(
-          `https://api.github.com/users?client_id=${
-            process.env.REACT_APP_GITHUB_CLIENT_ID
-          }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+  //   // GET request to Github API for first 30 users upon initial render
+  //   const res = await axios.get(
+  //         `https://api.github.com/users?client_id=${
+  //           process.env.REACT_APP_GITHUB_CLIENT_ID
+  //         }&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
 
-    // update state users key value with users data returned from API
-    setUsers(res.data)
+  //   // update state users key value with users data returned from API
+  //   setUsers(res.data)
 
-    // set state loading key value to false to stop spinner gif
-    setLoading(false)
-    // eslint-disable-next-line
-  }, [])
-
-
-  //  FUNCTION will clear searched users from state object
-  const clearUsers = () => {
-    setUsers([])
-    setLoading(false);
-  };
+  //   // set state loading key value to false to stop spinner gif
+  //   setLoading(false)
+  //   // eslint-disable-next-line
+  // }, [])
 
   // FUNCTION will alert users to enter text for search query
   const showAlert = (msg, type) =>{
@@ -105,11 +96,8 @@ const App = () => {
                   <Route exact path='/' render={props => (
                     <Fragment>
                       <Search
-                        clearUsers={clearUsers}
-                        // this boolean value will show clear button when users array has search result
-                        showClear={users.length > 0 ? true : false}
-                        setAlert={showAlert}
-                        />
+                         setAlert={showAlert}
+                      />
                       <Users />
                     </Fragment>
                   )}/>

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import GithubContext from '../../context/github/githubContext'
 
 
-const Search = ( { setAlert, showClear, clearUsers} ) => {
+const Search = ( { setAlert } ) => {
 
   // initalizing new context in order to access methods, reducers, etc.
   const githubContext = useContext(GithubContext);
 
-  const  [ text, setText] = useState('');
+  const  [ text, setText ] = useState('');
 
   // this function updates the text key value of the state object
   const onChange = (e) => {setText(e.target.value); }
@@ -48,10 +48,10 @@ const Search = ( { setAlert, showClear, clearUsers} ) => {
         </form>
 
           {/* This conditional with "&&' will show clear button when users rendered to page only*/}
-          {showClear && (
+          {githubContext.users.length > 0 && (
             <button
               className='btn btn-light btn-block'
-              onClick={clearUsers}
+              onClick={githubContext.clearUsers}
             >
               Clear Users
             </button>
@@ -62,8 +62,6 @@ const Search = ( { setAlert, showClear, clearUsers} ) => {
 }
 
 Search.propTypes = {
-  clearUsers: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
   setAlert: PropTypes.func.isRequired,
 }
 

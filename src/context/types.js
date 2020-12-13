@@ -1,5 +1,6 @@
 // string variables to use in our reducer
 
+export const INITIAL_USERS = 'INITIAL_USERS'
 export const SEARCH_USERS = 'SEARCH_USERS'
 export const GET_USER = 'GET_USER'
 export const CLEAR_USERS = 'CLEAR_USERS'

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import UserItem from './UserItem';
 import Spinner from '../layout/Spinner';
 import GithubContext from '../../context/github/githubContext';
@@ -9,7 +9,12 @@ const Users = () => {
   const githubContext = useContext(GithubContext)
 
   // deconstructed state attributes from githubContext for use in component
-  const { loading, users } = githubContext;
+  const { loading, users, getInitialUsers } = githubContext;
+
+  useEffect(()=>{
+    getInitialUsers();
+    // eslint-disable-next-line
+  },[])
 
   // this function maps through the gitHub users object to display user data
   if(loading){

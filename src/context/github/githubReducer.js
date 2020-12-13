@@ -1,4 +1,5 @@
 import {
+  INITIAL_USERS,
   SEARCH_USERS,
   SET_LOADING,
   CLEAR_USERS,
@@ -9,6 +10,12 @@ import {
 // Reducer determines changes to an applications state according to action it receives
 export default (state, action) => {
   switch(action.type){
+    case INITIAL_USERS:
+      return {
+        ...state,
+        users: action.payload,
+        loading: false
+      };
     case SEARCH_USERS:
       return {
         ...state,

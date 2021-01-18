@@ -1,13 +1,18 @@
+![Alt text](src/assets/GH-finder-image.png?raw=true "Contact Keeper")
+
 # Github Finder:
 
-This project is a web based application that allows a client to query the Github API for users with login names that include the text from the string entered in the search input field of the application home page.   
+This project is a web based application that allows a client to query the Github API for users with login names that include the text from the string entered in the search input field of the application home page.
 
-## Starting Apllication
+# Dependencies
 
-You can begin using this application with:
+# Installation
 
-### `npm start`
+# Environment Variables
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Contributing
 
+# References
+
+# Contact
+* jamesfeltonthomas@gmail.com

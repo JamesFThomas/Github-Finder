@@ -1,4 +1,4 @@
-![Alt text](src/assets/GH-finder-image.png?raw=true "Contact Keeper")
+![Alt text](public/GH-finder-image.png?raw=true "Contact Keeper")
 
 # Github Finder:
 
